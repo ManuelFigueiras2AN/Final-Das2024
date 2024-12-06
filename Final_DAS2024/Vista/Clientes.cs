@@ -170,23 +170,15 @@ namespace Vista
 
                     Cliente? cliente = dgv_Clientes.SelectedRows[0].DataBoundItem as Cliente;
 
-                    if (ValidarCampos())
-                    {
-                        cliente.Nombre = txt_NombreCliente.Text;
-                        cliente.Codigo = txt_Codigo.Text;
-                        cliente.Dni = Convert.ToInt32(txt_Documento.Text);
-                        cliente.Contacto = Convert.ToInt64(txt_Contacto.Text);
-                        cliente.Descripcion = rtxt_Descripcion.Text;
-
-                        if (controladoraClientes.EliminarCliente(cliente))
-                        {
-                            MessageBox.Show("El cliente  " + cliente.Nombre + " se eliminó exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("El cliente  " + cliente.Nombre + " no se puede eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
+                   if (controladoraClientes.EliminarCliente(cliente))
+                   {
+                       MessageBox.Show("El cliente  " + cliente.Nombre + " se eliminó exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   }
+                   else
+                   {
+                       MessageBox.Show("El cliente  " + cliente.Nombre + " no se puede eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   }
+                    
                     ActualizarVista();
                     break;
             }

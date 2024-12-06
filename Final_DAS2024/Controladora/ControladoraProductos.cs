@@ -1,6 +1,7 @@
 ﻿using Modelo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,13 +18,18 @@ namespace Controladora
         }
 
 
-        public List<Producto> ConsultarProductos()
+        public ReadOnlyCollection<Producto> ConsultarProductos()
         {
-            return _context.Productos.ToList();
+            return _context.Productos.OfType<Producto>().Where(p=>!(p is ProductoImportado)).ToList().AsReadOnly();
         }
-        public List<ProductoImportado> ConsultarProductosImportados()
+        public ReadOnlyCollection<ProductoImportado> ConsultarProductosImportados()
         {
-            return _context.ProductosImportados.ToList();
+            return _context.ProductosImportados.ToList().AsReadOnly();
+        }
+
+        public ReadOnlyCollection<Categoria> ConsultarCategorias()
+        {
+            return _context.Categorias.ToList().AsReadOnly();
         }
 
 

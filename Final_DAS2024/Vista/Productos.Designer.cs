@@ -30,12 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Productos));
             gb_Productos = new GroupBox();
+            pb_CargarImagen = new PictureBox();
+            lbl_Imagen = new Label();
+            txt_RutaImagen = new TextBox();
+            pb_ImagenProducto = new PictureBox();
+            lbl_Importados = new Label();
+            label1 = new Label();
             Logo_Empresa = new PictureBox();
             pb_EliminarProducto = new PictureBox();
             pb_EditarProducto = new PictureBox();
             pb_AgregarProducto = new PictureBox();
             lbl_Descripcion = new Label();
-            richTextBox1 = new RichTextBox();
+            rtxt_Descripcion = new RichTextBox();
             lbl_StockMinimo = new Label();
             lbl_Stock = new Label();
             lbl_Precio = new Label();
@@ -53,7 +59,10 @@
             cb_Categorias = new ComboBox();
             chk_Importado = new CheckBox();
             cb_Nacionalidad = new ComboBox();
+            ofd_CargarImagen = new OpenFileDialog();
             gb_Productos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_CargarImagen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pb_ImagenProducto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Logo_Empresa).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProducto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EditarProducto).BeginInit();
@@ -64,12 +73,18 @@
             // 
             // gb_Productos
             // 
+            gb_Productos.Controls.Add(pb_CargarImagen);
+            gb_Productos.Controls.Add(lbl_Imagen);
+            gb_Productos.Controls.Add(txt_RutaImagen);
+            gb_Productos.Controls.Add(pb_ImagenProducto);
+            gb_Productos.Controls.Add(lbl_Importados);
+            gb_Productos.Controls.Add(label1);
             gb_Productos.Controls.Add(Logo_Empresa);
             gb_Productos.Controls.Add(pb_EliminarProducto);
             gb_Productos.Controls.Add(pb_EditarProducto);
             gb_Productos.Controls.Add(pb_AgregarProducto);
             gb_Productos.Controls.Add(lbl_Descripcion);
-            gb_Productos.Controls.Add(richTextBox1);
+            gb_Productos.Controls.Add(rtxt_Descripcion);
             gb_Productos.Controls.Add(lbl_StockMinimo);
             gb_Productos.Controls.Add(lbl_Stock);
             gb_Productos.Controls.Add(lbl_Precio);
@@ -87,6 +102,8 @@
             gb_Productos.Controls.Add(cb_Categorias);
             gb_Productos.Controls.Add(chk_Importado);
             gb_Productos.Controls.Add(cb_Nacionalidad);
+            gb_Productos.FlatStyle = FlatStyle.System;
+            gb_Productos.Font = new Font("Microsoft YaHei", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             gb_Productos.Location = new Point(-1, 24);
             gb_Productos.Name = "gb_Productos";
             gb_Productos.Size = new Size(1421, 571);
@@ -94,15 +111,79 @@
             gb_Productos.TabStop = false;
             gb_Productos.Text = "Administración de Productos";
             // 
+            // pb_CargarImagen
+            // 
+            pb_CargarImagen.Location = new Point(234, 269);
+            pb_CargarImagen.Name = "pb_CargarImagen";
+            pb_CargarImagen.Size = new Size(428, 252);
+            pb_CargarImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            pb_CargarImagen.TabIndex = 33;
+            pb_CargarImagen.TabStop = false;
+            // 
+            // lbl_Imagen
+            // 
+            lbl_Imagen.AutoSize = true;
+            lbl_Imagen.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_Imagen.Location = new Point(29, 131);
+            lbl_Imagen.Name = "lbl_Imagen";
+            lbl_Imagen.Size = new Size(125, 19);
+            lbl_Imagen.TabIndex = 32;
+            lbl_Imagen.Text = "Imagen Producto";
+            // 
+            // txt_RutaImagen
+            // 
+            txt_RutaImagen.BackColor = SystemColors.InactiveCaption;
+            txt_RutaImagen.ForeColor = Color.MediumBlue;
+            txt_RutaImagen.Location = new Point(32, 146);
+            txt_RutaImagen.Name = "txt_RutaImagen";
+            txt_RutaImagen.Size = new Size(122, 27);
+            txt_RutaImagen.TabIndex = 31;
+            // 
+            // pb_ImagenProducto
+            // 
+            pb_ImagenProducto.BackColor = Color.Transparent;
+            pb_ImagenProducto.BackgroundImage = (Image)resources.GetObject("pb_ImagenProducto.BackgroundImage");
+            pb_ImagenProducto.BackgroundImageLayout = ImageLayout.Zoom;
+            pb_ImagenProducto.Cursor = Cursors.Hand;
+            pb_ImagenProducto.Image = (Image)resources.GetObject("pb_ImagenProducto.Image");
+            pb_ImagenProducto.Location = new Point(6, 145);
+            pb_ImagenProducto.Name = "pb_ImagenProducto";
+            pb_ImagenProducto.Size = new Size(26, 28);
+            pb_ImagenProducto.TabIndex = 30;
+            pb_ImagenProducto.TabStop = false;
+            pb_ImagenProducto.Click += pb_ImagenProducto_Click;
+            // 
+            // lbl_Importados
+            // 
+            lbl_Importados.AutoSize = true;
+            lbl_Importados.BackColor = Color.MediumBlue;
+            lbl_Importados.ForeColor = SystemColors.Control;
+            lbl_Importados.Location = new Point(963, 302);
+            lbl_Importados.Name = "lbl_Importados";
+            lbl_Importados.Size = new Size(214, 19);
+            lbl_Importados.TabIndex = 29;
+            lbl_Importados.Text = "PRODUCTOS IMPORTADOS";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.MediumBlue;
+            label1.ForeColor = SystemColors.Control;
+            label1.Location = new Point(967, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(210, 19);
+            label1.TabIndex = 28;
+            label1.Text = "PRODUCTOS NACIONALES";
+            // 
             // Logo_Empresa
             // 
             Logo_Empresa.BackColor = Color.Transparent;
             Logo_Empresa.BackgroundImage = (Image)resources.GetObject("Logo_Empresa.BackgroundImage");
             Logo_Empresa.BackgroundImageLayout = ImageLayout.Zoom;
             Logo_Empresa.Image = (Image)resources.GetObject("Logo_Empresa.Image");
-            Logo_Empresa.Location = new Point(18, 482);
+            Logo_Empresa.Location = new Point(-3, 511);
             Logo_Empresa.Name = "Logo_Empresa";
-            Logo_Empresa.Size = new Size(274, 72);
+            Logo_Empresa.Size = new Size(193, 54);
             Logo_Empresa.TabIndex = 27;
             Logo_Empresa.TabStop = false;
             // 
@@ -112,7 +193,7 @@
             pb_EliminarProducto.BackgroundImage = (Image)resources.GetObject("pb_EliminarProducto.BackgroundImage");
             pb_EliminarProducto.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EliminarProducto.Cursor = Cursors.Hand;
-            pb_EliminarProducto.Location = new Point(312, 192);
+            pb_EliminarProducto.Location = new Point(644, 184);
             pb_EliminarProducto.Name = "pb_EliminarProducto";
             pb_EliminarProducto.Size = new Size(49, 52);
             pb_EliminarProducto.TabIndex = 26;
@@ -125,7 +206,7 @@
             pb_EditarProducto.BackgroundImage = (Image)resources.GetObject("pb_EditarProducto.BackgroundImage");
             pb_EditarProducto.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EditarProducto.Cursor = Cursors.Hand;
-            pb_EditarProducto.Location = new Point(232, 191);
+            pb_EditarProducto.Location = new Point(564, 182);
             pb_EditarProducto.Name = "pb_EditarProducto";
             pb_EditarProducto.Size = new Size(60, 53);
             pb_EditarProducto.TabIndex = 25;
@@ -139,7 +220,7 @@
             pb_AgregarProducto.BackgroundImageLayout = ImageLayout.Zoom;
             pb_AgregarProducto.Cursor = Cursors.Hand;
             pb_AgregarProducto.Image = (Image)resources.GetObject("pb_AgregarProducto.Image");
-            pb_AgregarProducto.Location = new Point(163, 191);
+            pb_AgregarProducto.Location = new Point(495, 183);
             pb_AgregarProducto.Name = "pb_AgregarProducto";
             pb_AgregarProducto.Size = new Size(49, 52);
             pb_AgregarProducto.TabIndex = 24;
@@ -156,14 +237,16 @@
             lbl_Descripcion.TabIndex = 23;
             lbl_Descripcion.Text = "Descripción";
             // 
-            // richTextBox1
+            // rtxt_Descripcion
             // 
-            richTextBox1.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            richTextBox1.Location = new Point(468, 47);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(259, 117);
-            richTextBox1.TabIndex = 22;
-            richTextBox1.Text = "";
+            rtxt_Descripcion.BackColor = SystemColors.InactiveCaption;
+            rtxt_Descripcion.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            rtxt_Descripcion.ForeColor = Color.MediumBlue;
+            rtxt_Descripcion.Location = new Point(468, 47);
+            rtxt_Descripcion.Name = "rtxt_Descripcion";
+            rtxt_Descripcion.Size = new Size(259, 117);
+            rtxt_Descripcion.TabIndex = 22;
+            rtxt_Descripcion.Text = "";
             // 
             // lbl_StockMinimo
             // 
@@ -189,7 +272,7 @@
             // 
             lbl_Precio.AutoSize = true;
             lbl_Precio.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            lbl_Precio.Location = new Point(181, 118);
+            lbl_Precio.Location = new Point(181, 130);
             lbl_Precio.Name = "lbl_Precio";
             lbl_Precio.Size = new Size(52, 19);
             lbl_Precio.TabIndex = 19;
@@ -217,7 +300,9 @@
             // 
             // txt_StockMinimo
             // 
+            txt_StockMinimo.BackColor = SystemColors.InactiveCaption;
             txt_StockMinimo.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            txt_StockMinimo.ForeColor = Color.MediumBlue;
             txt_StockMinimo.Location = new Point(328, 93);
             txt_StockMinimo.Name = "txt_StockMinimo";
             txt_StockMinimo.Size = new Size(100, 25);
@@ -225,7 +310,9 @@
             // 
             // txt_Stock
             // 
+            txt_Stock.BackColor = SystemColors.InactiveCaption;
             txt_Stock.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            txt_Stock.ForeColor = Color.MediumBlue;
             txt_Stock.Location = new Point(328, 47);
             txt_Stock.Name = "txt_Stock";
             txt_Stock.Size = new Size(100, 25);
@@ -233,15 +320,19 @@
             // 
             // txt_Precio
             // 
+            txt_Precio.BackColor = SystemColors.InactiveCaption;
             txt_Precio.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            txt_Precio.Location = new Point(181, 136);
+            txt_Precio.ForeColor = Color.MediumBlue;
+            txt_Precio.Location = new Point(181, 148);
             txt_Precio.Name = "txt_Precio";
             txt_Precio.Size = new Size(100, 25);
             txt_Precio.TabIndex = 14;
             // 
             // txt_Nombre
             // 
+            txt_Nombre.BackColor = SystemColors.InactiveCaption;
             txt_Nombre.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            txt_Nombre.ForeColor = Color.MediumBlue;
             txt_Nombre.Location = new Point(181, 93);
             txt_Nombre.Name = "txt_Nombre";
             txt_Nombre.Size = new Size(100, 25);
@@ -249,7 +340,9 @@
             // 
             // txt_Codigo
             // 
+            txt_Codigo.BackColor = SystemColors.InactiveCaption;
             txt_Codigo.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            txt_Codigo.ForeColor = Color.MediumBlue;
             txt_Codigo.Location = new Point(181, 47);
             txt_Codigo.Name = "txt_Codigo";
             txt_Codigo.Size = new Size(100, 25);
@@ -257,25 +350,29 @@
             // 
             // dgv_ProductosNacionales
             // 
+            dgv_ProductosNacionales.BackgroundColor = SystemColors.Info;
             dgv_ProductosNacionales.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_ProductosNacionales.Location = new Point(780, 39);
+            dgv_ProductosNacionales.Location = new Point(781, 47);
             dgv_ProductosNacionales.Name = "dgv_ProductosNacionales";
             dgv_ProductosNacionales.Size = new Size(586, 233);
             dgv_ProductosNacionales.TabIndex = 11;
+            dgv_ProductosNacionales.CellClick += dgv_ProductosNacionales_CellClick;
             // 
             // dgv_ProductosImportados
             // 
+            dgv_ProductosImportados.BackgroundColor = SystemColors.Info;
             dgv_ProductosImportados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_ProductosImportados.Location = new Point(780, 302);
+            dgv_ProductosImportados.Location = new Point(781, 321);
             dgv_ProductosImportados.Name = "dgv_ProductosImportados";
             dgv_ProductosImportados.Size = new Size(586, 233);
             dgv_ProductosImportados.TabIndex = 10;
+            dgv_ProductosImportados.CellClick += dgv_ProductosImportados_CellClick;
             // 
             // lbl_Categorias
             // 
             lbl_Categorias.AutoSize = true;
             lbl_Categorias.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            lbl_Categorias.Location = new Point(327, 119);
+            lbl_Categorias.Location = new Point(327, 131);
             lbl_Categorias.Name = "lbl_Categorias";
             lbl_Categorias.Size = new Size(81, 19);
             lbl_Categorias.TabIndex = 9;
@@ -285,7 +382,7 @@
             // 
             lbl_Nacionalidad.AutoSize = true;
             lbl_Nacionalidad.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            lbl_Nacionalidad.Location = new Point(32, 73);
+            lbl_Nacionalidad.Location = new Point(33, 73);
             lbl_Nacionalidad.Name = "lbl_Nacionalidad";
             lbl_Nacionalidad.Size = new Size(98, 19);
             lbl_Nacionalidad.TabIndex = 8;
@@ -293,9 +390,11 @@
             // 
             // cb_Categorias
             // 
+            cb_Categorias.BackColor = SystemColors.InactiveCaption;
             cb_Categorias.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            cb_Categorias.ForeColor = Color.MediumBlue;
             cb_Categorias.FormattingEnabled = true;
-            cb_Categorias.Location = new Point(328, 137);
+            cb_Categorias.Location = new Point(328, 149);
             cb_Categorias.Name = "cb_Categorias";
             cb_Categorias.Size = new Size(117, 27);
             cb_Categorias.TabIndex = 7;
@@ -304,7 +403,7 @@
             // 
             chk_Importado.AutoSize = true;
             chk_Importado.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
-            chk_Importado.Location = new Point(32, 39);
+            chk_Importado.Location = new Point(42, 49);
             chk_Importado.Name = "chk_Importado";
             chk_Importado.Size = new Size(100, 23);
             chk_Importado.TabIndex = 6;
@@ -313,13 +412,19 @@
             // 
             // cb_Nacionalidad
             // 
+            cb_Nacionalidad.BackColor = SystemColors.InactiveCaption;
             cb_Nacionalidad.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            cb_Nacionalidad.ForeColor = Color.MediumBlue;
             cb_Nacionalidad.FormattingEnabled = true;
             cb_Nacionalidad.Items.AddRange(new object[] { "Alemania", "Australia", "Bélgica", "Brasil", "Canadá", "China", "Corea del Sur", "España", "Estados Unidos", "Francia", "Hong Kong", "India", "Italia", "Japón", "México", "Países Bajos", "Reino Unido", "Singapur", "Suiza", "Tailandia" });
-            cb_Nacionalidad.Location = new Point(32, 91);
+            cb_Nacionalidad.Location = new Point(33, 91);
             cb_Nacionalidad.Name = "cb_Nacionalidad";
             cb_Nacionalidad.Size = new Size(121, 27);
             cb_Nacionalidad.TabIndex = 5;
+            // 
+            // ofd_CargarImagen
+            // 
+            ofd_CargarImagen.FileName = "CargarImagen";
             // 
             // Productos
             // 
@@ -328,11 +433,14 @@
             BackColor = Color.LawnGreen;
             ClientSize = new Size(1415, 620);
             Controls.Add(gb_Productos);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Productos";
             Text = "Productos";
             Load += Productos_Load;
             gb_Productos.ResumeLayout(false);
             gb_Productos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_CargarImagen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_ImagenProducto).EndInit();
             ((System.ComponentModel.ISupportInitialize)Logo_Empresa).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProducto).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EditarProducto).EndInit();
@@ -363,10 +471,17 @@
         private Label lbl_Nombre;
         private Label lbl_Codigo;
         private Label lbl_Descripcion;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtxt_Descripcion;
         private PictureBox Logo_Empresa;
         private PictureBox pb_EliminarProducto;
         private PictureBox pb_EditarProducto;
         private PictureBox pb_AgregarProducto;
+        private Label lbl_Importados;
+        private Label label1;
+        private TextBox txt_RutaImagen;
+        private PictureBox pb_ImagenProducto;
+        private Label lbl_Imagen;
+        private OpenFileDialog ofd_CargarImagen;
+        private PictureBox pb_CargarImagen;
     }
 }

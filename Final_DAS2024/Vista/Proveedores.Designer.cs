@@ -29,17 +29,14 @@
         private void InitializeComponent()
         {
             dgv_Proveedores = new DataGridView();
-            btn_CrearProveedor = new Button();
-            btn_EditarProveedor = new Button();
-            btn_EliminarProveedor = new Button();
             lbl_CodigoProveedor = new Label();
             lbl_NombreProveedor = new Label();
             lbl_Contacto = new Label();
-            lbl_DescripcionProveedor = new Label();
             txt_CodigoProveedor = new TextBox();
             txt_NombreProveedor = new TextBox();
             txt_ContactoProveedor = new TextBox();
-            txt_DescripcionProveedor = new TextBox();
+            richTextBox1 = new RichTextBox();
+            lbl_Descripcion = new Label();
             ((System.ComponentModel.ISupportInitialize)dgv_Proveedores).BeginInit();
             SuspendLayout();
             // 
@@ -51,36 +48,6 @@
             dgv_Proveedores.Size = new Size(422, 220);
             dgv_Proveedores.TabIndex = 0;
             dgv_Proveedores.CellClick += dgv_Proveedores_CellClick;
-            // 
-            // btn_CrearProveedor
-            // 
-            btn_CrearProveedor.Location = new Point(241, 20);
-            btn_CrearProveedor.Name = "btn_CrearProveedor";
-            btn_CrearProveedor.Size = new Size(125, 43);
-            btn_CrearProveedor.TabIndex = 1;
-            btn_CrearProveedor.Text = "Nuevo Proveedor";
-            btn_CrearProveedor.UseVisualStyleBackColor = true;
-            btn_CrearProveedor.Click += btn_CrearProveedor_Click;
-            // 
-            // btn_EditarProveedor
-            // 
-            btn_EditarProveedor.Location = new Point(241, 69);
-            btn_EditarProveedor.Name = "btn_EditarProveedor";
-            btn_EditarProveedor.Size = new Size(125, 23);
-            btn_EditarProveedor.TabIndex = 2;
-            btn_EditarProveedor.Text = "Editar Proveedor";
-            btn_EditarProveedor.UseVisualStyleBackColor = true;
-            btn_EditarProveedor.Click += btn_EditarProveedor_Click;
-            // 
-            // btn_EliminarProveedor
-            // 
-            btn_EliminarProveedor.Location = new Point(241, 98);
-            btn_EliminarProveedor.Name = "btn_EliminarProveedor";
-            btn_EliminarProveedor.Size = new Size(125, 23);
-            btn_EliminarProveedor.TabIndex = 3;
-            btn_EliminarProveedor.Text = "Eliminar Proveedor";
-            btn_EliminarProveedor.UseVisualStyleBackColor = true;
-            btn_EliminarProveedor.Click += btn_EliminarProveedor_Click;
             // 
             // lbl_CodigoProveedor
             // 
@@ -109,15 +76,6 @@
             lbl_Contacto.TabIndex = 6;
             lbl_Contacto.Text = "Contacto";
             // 
-            // lbl_DescripcionProveedor
-            // 
-            lbl_DescripcionProveedor.AutoSize = true;
-            lbl_DescripcionProveedor.Location = new Point(12, 108);
-            lbl_DescripcionProveedor.Name = "lbl_DescripcionProveedor";
-            lbl_DescripcionProveedor.Size = new Size(69, 15);
-            lbl_DescripcionProveedor.TabIndex = 7;
-            lbl_DescripcionProveedor.Text = "Descripción";
-            // 
             // txt_CodigoProveedor
             // 
             txt_CodigoProveedor.Location = new Point(91, 20);
@@ -139,29 +97,36 @@
             txt_ContactoProveedor.Size = new Size(100, 23);
             txt_ContactoProveedor.TabIndex = 10;
             // 
-            // txt_DescripcionProveedor
+            // richTextBox1
             // 
-            txt_DescripcionProveedor.Location = new Point(91, 105);
-            txt_DescripcionProveedor.Name = "txt_DescripcionProveedor";
-            txt_DescripcionProveedor.Size = new Size(100, 23);
-            txt_DescripcionProveedor.TabIndex = 11;
+            richTextBox1.Location = new Point(224, 22);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(220, 62);
+            richTextBox1.TabIndex = 11;
+            richTextBox1.Text = "";
+            // 
+            // lbl_Descripcion
+            // 
+            lbl_Descripcion.AutoSize = true;
+            lbl_Descripcion.Location = new Point(224, 9);
+            lbl_Descripcion.Name = "lbl_Descripcion";
+            lbl_Descripcion.Size = new Size(69, 15);
+            lbl_Descripcion.TabIndex = 12;
+            lbl_Descripcion.Text = "Descripción";
             // 
             // Proveedores
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(573, 450);
-            Controls.Add(txt_DescripcionProveedor);
+            ClientSize = new Size(830, 450);
+            Controls.Add(lbl_Descripcion);
+            Controls.Add(richTextBox1);
             Controls.Add(txt_ContactoProveedor);
             Controls.Add(txt_NombreProveedor);
             Controls.Add(txt_CodigoProveedor);
-            Controls.Add(lbl_DescripcionProveedor);
             Controls.Add(lbl_Contacto);
             Controls.Add(lbl_NombreProveedor);
             Controls.Add(lbl_CodigoProveedor);
-            Controls.Add(btn_EliminarProveedor);
-            Controls.Add(btn_EditarProveedor);
-            Controls.Add(btn_CrearProveedor);
             Controls.Add(dgv_Proveedores);
             Name = "Proveedores";
             Text = "Proveedores";
@@ -174,16 +139,13 @@
         #endregion
 
         private DataGridView dgv_Proveedores;
-        private Button btn_CrearProveedor;
-        private Button btn_EditarProveedor;
-        private Button btn_EliminarProveedor;
         private Label lbl_CodigoProveedor;
         private Label lbl_NombreProveedor;
         private Label lbl_Contacto;
-        private Label lbl_DescripcionProveedor;
         private TextBox txt_CodigoProveedor;
         private TextBox txt_NombreProveedor;
         private TextBox txt_ContactoProveedor;
-        private TextBox txt_DescripcionProveedor;
+        private RichTextBox richTextBox1;
+        private Label lbl_Descripcion;
     }
 }

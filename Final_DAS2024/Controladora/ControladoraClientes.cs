@@ -1,4 +1,5 @@
 ﻿using Modelo;
+using System.Collections.ObjectModel;
 
 namespace Controladora
 {
@@ -11,15 +12,14 @@ namespace Controladora
             _context = new Context();
         }
 
-        public List<Cliente> ConsultarClientes()
+        public ReadOnlyCollection<Cliente> ConsultarClientes()
         {
-            return _context.Clientes.OfType<Cliente>().Where(c=>!(c is ClienteMayorista)).ToList();
+            return _context.Clientes.OfType<Cliente>().Where(c=>!(c is ClienteMayorista)).ToList().AsReadOnly();
         }
-        //return _context.Pasajeros.OfType<Pasajero>().Where(p => !(p is PasajeroEstudiante)).ToList()
-
-        public List<ClienteMayorista> ConsultarClientesMayoristas()
+        
+        public ReadOnlyCollection<ClienteMayorista> ConsultarClientesMayoristas()
         {
-            return _context.ClientesMayoristas.ToList();
+            return _context.ClientesMayoristas.ToList().AsReadOnly();
         }
 
 

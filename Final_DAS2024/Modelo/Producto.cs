@@ -15,6 +15,7 @@ namespace Modelo
         public decimal Precio { get; set; }
         public int Stock { get; set; }
         public int StockMinimo {  get; set; }
+        public string? ImagenProducto {  get; set; }
         public int CategoriaId {  get; set; }
 
         public Categoria CategoriaAsociada {  get; set; }
@@ -28,6 +29,10 @@ namespace Modelo
                 return false;
             }
             else return true;
+        }
+        public string NombreCategoria
+        {
+            get { return CategoriaAsociada != null ? CategoriaAsociada.Nombre : string.Empty; }
         }
     }
 }
