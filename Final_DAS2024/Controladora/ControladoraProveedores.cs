@@ -25,6 +25,32 @@ namespace Controladora
         {
             return _context.Productos.ToList().AsReadOnly();
         }
+        public ReadOnlyCollection<Categoria> CargarCategorias()
+        {
+            return _context.Categorias.ToList().AsReadOnly();
+        }
+        public ReadOnlyCollection<Producto> ConsultaPorCategoria(Categoria Categoria)
+        {
+            return _context.Productos.Where(p =>( p.CategoriaAsociada.Nombre == Categoria.Nombre)).ToList().AsReadOnly();
+        }
+        public List<Producto>RecuperarProductosProveedor(Proveedor proveedor) 
+        {
+            return _context.Proveedores.Where(p => p.Codigo == proveedor.Codigo).SelectMany(p => p.CatalogoProductos).ToList();
+        }
+
+
+        public ReadOnlyCollection<Producto> ConsultaPorProveedor(Proveedor proveedor)
+        {
+            return _context.Proveedores.Where(p => p.Codigo == proveedor.Codigo).SelectMany(p => p.CatalogoProductos).ToList().AsReadOnly();
+        }
+
+        public bool EliminarProducto(Proveedor proveedor,Producto producto)
+        {
+            proveedor.DesasociarProducto(producto);
+           // _context.Proveedores.Remove(producto);
+            //_context.SaveChanges();
+            return true;
+        }
 
         public bool CrearProveedor(Proveedor proveedor)
         {
