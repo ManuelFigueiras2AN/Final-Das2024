@@ -30,15 +30,109 @@ namespace Vista
         }
 
 
+        private void pb_AgregarProveedor_Click(object sender, EventArgs e)
+        {
+            if (ValidarCampos())
+            {
+                Proveedor proveedor = new Proveedor();
+                proveedor.Codigo = txt_CodigoProveedor.Text;
+                proveedor.Nombre = txt_NombreProveedor.Text;
+                proveedor.Contacto = Convert.ToInt64(txt_ContactoProveedor.Text);
+                proveedor.Descripcion = rtxt_Descripcion.Text;
 
+                if (clb_Productos.CheckedItems.Count > 0)
+                {
+                    foreach (var productos in clb_Productos.CheckedItems)
+                    {
+                        Producto producto = productos as Producto;
+                        if (proveedor.AsociarProducto(producto))
+
+                        {
+                            MostrarNotificacion("Se agrego " + producto.Nombre + " al catalogo.", "Noticias Catalogo");
+                        }
+                        else
+                        {
+                            MostrarNotificacion(producto.Nombre + " ya existe en el  catalogo.", "Noticias Catalogo");
+                        }
+                    }
+                }
+
+                if (controladoraProveedores.CrearProveedor(proveedor))
+                {
+                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " se creó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " ya existe", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                RefrescarVista();
+            }
+        }
+
+
+
+        private void pb_EditarProveedor_Click(object sender, EventArgs e)
+        {
+
+            if (dgv_Proveedores.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor", "Información", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
+
+            if (ValidarCampos())
+            {
+                proveedor.Codigo = txt_CodigoProveedor.Text;
+                proveedor.Nombre = txt_NombreProveedor.Text;
+                proveedor.Contacto = Convert.ToInt64(txt_ContactoProveedor.Text);
+                proveedor.Descripcion = rtxt_Descripcion.Text;
+
+                if (controladoraProveedores.ModificarProveedor(proveedor))
+                {
+                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " se editó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " no se pudo editar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                RefrescarVista();
+
+            }
+        }
+
+        private void pb_EliminarProveedor_Click(object sender, EventArgs e)
+        {
+            if (dgv_Proveedores.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor", "Información", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
+
+            if (controladoraProveedores.EliminarProveedor(proveedor))
+            {
+                MessageBox.Show("El proveedor  " + proveedor.Nombre + " se eliminó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("El proveedor  " + proveedor.Nombre + " no se pudo eliminar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            RefrescarVista();
+        }
 
 
         private void dgv_Proveedores_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow Seleccion = dgv_Proveedores.Rows[e.RowIndex];
+                for (int i = 0; i < clb_Productos.Items.Count; i++)
+                {
+                    clb_Productos.SetItemChecked(i, false); // Desmarcar todos los elementos
+                }
 
+                DataGridViewRow Seleccion = dgv_Proveedores.Rows[e.RowIndex];
+                
                 if (Seleccion != null)
                 {
                     txt_CodigoProveedor.Enabled = false;
@@ -50,8 +144,20 @@ namespace Vista
                     txt_ContactoProveedor.Text = proveedor.Contacto.ToString();
                     proveedor.CatalogoProductos = controladoraProveedores.RecuperarProductosProveedor(proveedor);
 
-                    RefrescarVistaCatalogo(proveedor);
 
+                    foreach (Producto prod in proveedor.CatalogoProductos)
+                    {
+                        for (int i = 0; i < clb_Productos.Items.Count; i++)
+                        {
+                            var item = clb_Productos.Items[i] as Producto;
+                            if (item != null && item.CodigoProducto  == prod.CodigoProducto)
+                            {
+                                clb_Productos.SetItemChecked(i, true);
+                            }
+                        }
+                    }
+
+                    RefrescarVistaCatalogo(proveedor);
                 }
             }
 
@@ -140,7 +246,7 @@ namespace Vista
         private void RefrescarVistaCatalogo(Proveedor proveedor)
         {
             dgv_Productos.AutoGenerateColumns = false;
-            dgv_Productos.DataSource = controladoraProveedores.ConsultaPorProveedor(proveedor);
+            dgv_Productos.DataSource = controladoraProveedores.RecuperarProductosProveedor(proveedor);
             dgv_Productos.Columns.Clear();
 
             dgv_Productos.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Codigo", DataPropertyName = "CodigoProducto" });
@@ -164,112 +270,45 @@ namespace Vista
             }
         }
 
-        private void pb_AgregarProveedor_Click(object sender, EventArgs e)
-        {
-            if (ValidarCampos())
-            {
-                Proveedor proveedor = new Proveedor();
-                proveedor.Codigo = txt_CodigoProveedor.Text;
-                proveedor.Nombre = txt_NombreProveedor.Text;
-                proveedor.Contacto = Convert.ToInt64(txt_ContactoProveedor.Text);
-                proveedor.Descripcion = rtxt_Descripcion.Text;
-
-                if (clb_Productos.CheckedItems.Count > 0)
-                {
-                    foreach (var productos in clb_Productos.CheckedItems)
-                    {
-                        Producto producto = productos as Producto;
-                        if (proveedor.AsociarProducto(producto))
-
-                        {
-                            MostrarNotificacion("Se agrego " + producto.Nombre + " al catalogo.", "Noticias Catalogo");
-                        }
-                        else
-                        {
-                            MostrarNotificacion(producto.Nombre + " ya existe en el  catalogo.", "Noticias Catalogo");
-                        }
-                    }
-                }
-
-                if (controladoraProveedores.CrearProveedor(proveedor))
-                {
-                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " se creó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " ya existe", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                RefrescarVista();
-            }
-        }
-
-        private void pb_EditarProveedor_Click(object sender, EventArgs e)
-        {
-
-            if (dgv_Proveedores.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe seleccionar un proveedor", "Información", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-
-            Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
-
-            if (ValidarCampos())
-            {
-                proveedor.Codigo = txt_CodigoProveedor.Text;
-                proveedor.Nombre = txt_NombreProveedor.Text;
-                proveedor.Contacto = Convert.ToInt64(txt_ContactoProveedor.Text);
-                proveedor.Descripcion = rtxt_Descripcion.Text;
-
-                if (controladoraProveedores.ModificarProveedor(proveedor))
-                {
-                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " se editó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("El proveedor  " + proveedor.Nombre + " no se pudo editar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                RefrescarVista();
-            }
-        }
-
-        private void pb_EliminarProveedor_Click(object sender, EventArgs e)
-        {
-            if (dgv_Proveedores.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Debe seleccionar un proveedor", "Información", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-
-            Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
-
-            if (controladoraProveedores.EliminarProveedor(proveedor))
-            {
-                MessageBox.Show("El proveedor  " + proveedor.Nombre + " se eliminó exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("El proveedor  " + proveedor.Nombre + " no se pudo eliminar", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            RefrescarVista();
-        }
+       
 
         private void MostrarNotificacion(string mensaje, string titulo)
         {
             notificacion_Catalogo.BalloonTipTitle = titulo;
             notificacion_Catalogo.BalloonTipText = mensaje;
             notificacion_Catalogo.BalloonTipIcon = ToolTipIcon.Info;
-            notificacion_Catalogo.ShowBalloonTip(3000); // Muestra la notificación durante 3 segundos
+            notificacion_Catalogo.ShowBalloonTip(4000); // Muestra la notificación durante 3 segundos
         }
 
 
-        private void dgv_Productos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-
-        }
+       
 
         private void pb_AgregarProducto_Click(object sender, EventArgs e)
         {
+           
 
+            Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
+            Producto? productoSeleccionado = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
+
+            if (clb_Productos.CheckedItems.Count > 0)
+            {
+                foreach (var productos in clb_Productos.CheckedItems)
+                {
+                    Producto producto = productos as Producto;
+                    if (proveedor.AsociarProducto(productoSeleccionado))
+
+                    {
+                        MostrarNotificacion("Se agrego " + productoSeleccionado.Nombre + " al catalogo.", "Noticias Catalogo");
+                    }
+                    else
+                    {
+                        MostrarNotificacion(productoSeleccionado.Nombre + " ya existe en el  catalogo.", "Noticias Catalogo");
+                    }
+                }
+            }
+
+
+            RefrescarVistaCatalogo(proveedor);
         }
 
         private void pb_EliminarProducto_Click(object sender, EventArgs e)
@@ -282,13 +321,17 @@ namespace Vista
             Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
             Producto? producto = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
 
-            if (controladoraProveedores.EliminarProducto(proveedor,producto))
+            if (proveedor.DesasociarProducto(producto)) 
             {
-                
-                MostrarNotificacion("Se eliminó " + producto.Nombre + " del Catalogo","Noticias del Catalogo");
+              MostrarNotificacion("Se eliminó " + producto.Nombre + " del catalogo.", "Noticias Catalogo");
+            }
+            else 
+            {
+                MostrarNotificacion(producto.Nombre + " no existe en el  catalogo.", "Noticias Catalogo");
             }
 
-            RefrescarVistaCatalogo(proveedor);
+                
+            //RefrescarVistaCatalogo(proveedor);
         }
     }
 }

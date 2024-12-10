@@ -37,20 +37,14 @@ namespace Controladora
         {
             return _context.Proveedores.Where(p => p.Codigo == proveedor.Codigo).SelectMany(p => p.CatalogoProductos).ToList();
         }
-
+       
 
         public ReadOnlyCollection<Producto> ConsultaPorProveedor(Proveedor proveedor)
         {
-            return _context.Proveedores.Where(p => p.Codigo == proveedor.Codigo).SelectMany(p => p.CatalogoProductos).ToList().AsReadOnly();
+            return proveedor.CatalogoProductos.ToList().AsReadOnly();
         }
 
-        public bool EliminarProducto(Proveedor proveedor,Producto producto)
-        {
-            proveedor.DesasociarProducto(producto);
-           // _context.Proveedores.Remove(producto);
-            //_context.SaveChanges();
-            return true;
-        }
+       
 
         public bool CrearProveedor(Proveedor proveedor)
         {

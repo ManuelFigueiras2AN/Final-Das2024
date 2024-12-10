@@ -131,6 +131,7 @@ namespace Vista
                     break;
 
                 case false:
+
                     cb_Nacionalidad.Enabled = false;
                     if (dgv_ProductosNacionales.SelectedRows.Count == 0)
                     {
@@ -342,7 +343,15 @@ namespace Vista
                     txt_StockMinimo.Text = nacional.StockMinimo.ToString();
                     txt_RutaImagen.Text = nacional.ImagenProducto.ToString();
                     rtxt_Descripcion.Text = nacional.Descripcion.ToString();
-                    pb_CargarImagen.Load(nacional.ImagenProducto.ToString());
+                    if (!string.IsNullOrEmpty(nacional.ImagenProducto) && File.Exists(nacional.ImagenProducto))
+                    {
+                        // Establecer la ruta de la imagen
+                        pb_CargarImagen.ImageLocation = nacional.ImagenProducto.ToString();
+                    }
+                    else
+                    {
+                        pb_CargarImagen.ImageLocation = "C:\\Users\\Ente\\source\\repos\\Final-Das2024\\Final_DAS2024\\Vista\\Properties\\Resources\\logo fig kart-01 (1).png";
+                    }
                     chk_Importado.Checked = false;
                     chk_Importado.Enabled = false;
                 }
@@ -399,7 +408,7 @@ namespace Vista
                 // Obtener la ruta del archivo seleccionado
                 string rutaArchivo = cargarImagen.FileName;
 
-                // Mostrar la ruta en un TextBox, Label o usarla como lo necesites
+                // Mostrar la ruta en un TextBox
                 txt_RutaImagen.Text = rutaArchivo;
             }
         }

@@ -113,6 +113,7 @@
             // 
             // pb_CargarImagen
             // 
+            pb_CargarImagen.Image = (Image)resources.GetObject("pb_CargarImagen.Image");
             pb_CargarImagen.Location = new Point(234, 269);
             pb_CargarImagen.Name = "pb_CargarImagen";
             pb_CargarImagen.Size = new Size(428, 252);

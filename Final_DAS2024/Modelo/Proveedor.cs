@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,7 @@ namespace Modelo
                 return false;
             }
         }
+
 
         public bool DesasociarProducto(Producto producto)
         {

@@ -40,6 +40,9 @@
             rtxt_Descripcion = new RichTextBox();
             lbl_Descripcion = new Label();
             gb_Proovedores = new GroupBox();
+            pb_LogoEmpresa = new PictureBox();
+            lbl_CatalogoProductos = new Label();
+            lbl_Proveedores = new Label();
             pb_EliminarProducto = new PictureBox();
             pb_AgregarProducto = new PictureBox();
             pb_EliminarProveedor = new PictureBox();
@@ -53,6 +56,7 @@
             notificacion_Catalogo = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)dgv_Proveedores).BeginInit();
             gb_Proovedores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_LogoEmpresa).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProducto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarProducto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProveedor).BeginInit();
@@ -63,64 +67,76 @@
             // 
             // dgv_Proveedores
             // 
+            dgv_Proveedores.BackgroundColor = SystemColors.Info;
             dgv_Proveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Proveedores.Location = new Point(31, 285);
+            dgv_Proveedores.Location = new Point(31, 273);
             dgv_Proveedores.Name = "dgv_Proveedores";
-            dgv_Proveedores.Size = new Size(422, 220);
+            dgv_Proveedores.Size = new Size(448, 220);
             dgv_Proveedores.TabIndex = 0;
             dgv_Proveedores.CellClick += dgv_Proveedores_CellClick;
             // 
             // lbl_CodigoProveedor
             // 
             lbl_CodigoProveedor.AutoSize = true;
-            lbl_CodigoProveedor.Location = new Point(31, 35);
+            lbl_CodigoProveedor.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_CodigoProveedor.Location = new Point(42, 48);
             lbl_CodigoProveedor.Name = "lbl_CodigoProveedor";
-            lbl_CodigoProveedor.Size = new Size(46, 15);
+            lbl_CodigoProveedor.Size = new Size(58, 19);
             lbl_CodigoProveedor.TabIndex = 4;
             lbl_CodigoProveedor.Text = "Codigo";
             // 
             // lbl_NombreProveedor
             // 
             lbl_NombreProveedor.AutoSize = true;
-            lbl_NombreProveedor.Location = new Point(6, 64);
+            lbl_NombreProveedor.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_NombreProveedor.Location = new Point(6, 81);
             lbl_NombreProveedor.Name = "lbl_NombreProveedor";
-            lbl_NombreProveedor.Size = new Size(73, 15);
+            lbl_NombreProveedor.Size = new Size(94, 19);
             lbl_NombreProveedor.TabIndex = 5;
             lbl_NombreProveedor.Text = "Razón Social";
             // 
             // lbl_Contacto
             // 
             lbl_Contacto.AutoSize = true;
-            lbl_Contacto.Location = new Point(21, 91);
+            lbl_Contacto.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_Contacto.Location = new Point(31, 106);
             lbl_Contacto.Name = "lbl_Contacto";
-            lbl_Contacto.Size = new Size(56, 15);
+            lbl_Contacto.Size = new Size(69, 19);
             lbl_Contacto.TabIndex = 6;
             lbl_Contacto.Text = "Contacto";
             // 
             // txt_CodigoProveedor
             // 
-            txt_CodigoProveedor.Location = new Point(83, 32);
+            txt_CodigoProveedor.BackColor = SystemColors.InactiveCaption;
+            txt_CodigoProveedor.ForeColor = SystemColors.Menu;
+            txt_CodigoProveedor.Location = new Point(104, 48);
             txt_CodigoProveedor.Name = "txt_CodigoProveedor";
-            txt_CodigoProveedor.Size = new Size(100, 23);
+            txt_CodigoProveedor.Size = new Size(100, 27);
             txt_CodigoProveedor.TabIndex = 8;
             // 
             // txt_NombreProveedor
             // 
-            txt_NombreProveedor.Location = new Point(83, 61);
+            txt_NombreProveedor.BackColor = SystemColors.InactiveCaption;
+            txt_NombreProveedor.ForeColor = SystemColors.Menu;
+            txt_NombreProveedor.Location = new Point(104, 77);
             txt_NombreProveedor.Name = "txt_NombreProveedor";
-            txt_NombreProveedor.Size = new Size(100, 23);
+            txt_NombreProveedor.Size = new Size(100, 27);
             txt_NombreProveedor.TabIndex = 9;
             // 
             // txt_ContactoProveedor
             // 
-            txt_ContactoProveedor.Location = new Point(83, 88);
+            txt_ContactoProveedor.BackColor = SystemColors.InactiveCaption;
+            txt_ContactoProveedor.ForeColor = SystemColors.Menu;
+            txt_ContactoProveedor.Location = new Point(104, 106);
             txt_ContactoProveedor.Name = "txt_ContactoProveedor";
-            txt_ContactoProveedor.Size = new Size(100, 23);
+            txt_ContactoProveedor.Size = new Size(100, 27);
             txt_ContactoProveedor.TabIndex = 10;
             // 
             // rtxt_Descripcion
             // 
-            rtxt_Descripcion.Location = new Point(216, 38);
+            rtxt_Descripcion.BackColor = SystemColors.InactiveCaption;
+            rtxt_Descripcion.ForeColor = SystemColors.Menu;
+            rtxt_Descripcion.Location = new Point(237, 54);
             rtxt_Descripcion.Name = "rtxt_Descripcion";
             rtxt_Descripcion.Size = new Size(220, 62);
             rtxt_Descripcion.TabIndex = 11;
@@ -129,14 +145,18 @@
             // lbl_Descripcion
             // 
             lbl_Descripcion.AutoSize = true;
-            lbl_Descripcion.Location = new Point(216, 20);
+            lbl_Descripcion.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_Descripcion.Location = new Point(237, 35);
             lbl_Descripcion.Name = "lbl_Descripcion";
-            lbl_Descripcion.Size = new Size(69, 15);
+            lbl_Descripcion.Size = new Size(87, 19);
             lbl_Descripcion.TabIndex = 12;
             lbl_Descripcion.Text = "Descripción";
             // 
             // gb_Proovedores
             // 
+            gb_Proovedores.Controls.Add(pb_LogoEmpresa);
+            gb_Proovedores.Controls.Add(lbl_CatalogoProductos);
+            gb_Proovedores.Controls.Add(lbl_Proveedores);
             gb_Proovedores.Controls.Add(pb_EliminarProducto);
             gb_Proovedores.Controls.Add(pb_AgregarProducto);
             gb_Proovedores.Controls.Add(pb_EliminarProveedor);
@@ -156,6 +176,7 @@
             gb_Proovedores.Controls.Add(lbl_Contacto);
             gb_Proovedores.Controls.Add(txt_NombreProveedor);
             gb_Proovedores.Controls.Add(txt_CodigoProveedor);
+            gb_Proovedores.Font = new Font("Microsoft YaHei", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             gb_Proovedores.Location = new Point(-2, 12);
             gb_Proovedores.Name = "gb_Proovedores";
             gb_Proovedores.Size = new Size(1007, 534);
@@ -163,11 +184,45 @@
             gb_Proovedores.TabStop = false;
             gb_Proovedores.Text = "Administración Proveedores";
             // 
+            // pb_LogoEmpresa
+            // 
+            pb_LogoEmpresa.BackColor = Color.Transparent;
+            pb_LogoEmpresa.BackgroundImage = (Image)resources.GetObject("pb_LogoEmpresa.BackgroundImage");
+            pb_LogoEmpresa.BackgroundImageLayout = ImageLayout.Zoom;
+            pb_LogoEmpresa.Image = (Image)resources.GetObject("pb_LogoEmpresa.Image");
+            pb_LogoEmpresa.Location = new Point(422, 139);
+            pb_LogoEmpresa.Name = "pb_LogoEmpresa";
+            pb_LogoEmpresa.Size = new Size(177, 108);
+            pb_LogoEmpresa.TabIndex = 31;
+            pb_LogoEmpresa.TabStop = false;
+            // 
+            // lbl_CatalogoProductos
+            // 
+            lbl_CatalogoProductos.AutoSize = true;
+            lbl_CatalogoProductos.BackColor = Color.MediumBlue;
+            lbl_CatalogoProductos.ForeColor = SystemColors.Control;
+            lbl_CatalogoProductos.Location = new Point(648, 255);
+            lbl_CatalogoProductos.Name = "lbl_CatalogoProductos";
+            lbl_CatalogoProductos.Size = new Size(218, 19);
+            lbl_CatalogoProductos.TabIndex = 30;
+            lbl_CatalogoProductos.Text = "CATALOGO DE PRODUCTOS";
+            // 
+            // lbl_Proveedores
+            // 
+            lbl_Proveedores.AutoSize = true;
+            lbl_Proveedores.BackColor = Color.MediumBlue;
+            lbl_Proveedores.ForeColor = SystemColors.Control;
+            lbl_Proveedores.Location = new Point(186, 255);
+            lbl_Proveedores.Name = "lbl_Proveedores";
+            lbl_Proveedores.Size = new Size(126, 19);
+            lbl_Proveedores.TabIndex = 29;
+            lbl_Proveedores.Text = "PROVEEDORES ";
+            // 
             // pb_EliminarProducto
             // 
             pb_EliminarProducto.Cursor = Cursors.Hand;
             pb_EliminarProducto.Image = (Image)resources.GetObject("pb_EliminarProducto.Image");
-            pb_EliminarProducto.Location = new Point(750, 156);
+            pb_EliminarProducto.Location = new Point(760, 162);
             pb_EliminarProducto.Name = "pb_EliminarProducto";
             pb_EliminarProducto.Size = new Size(45, 49);
             pb_EliminarProducto.SizeMode = PictureBoxSizeMode.Zoom;
@@ -178,7 +233,7 @@
             // pb_AgregarProducto
             // 
             pb_AgregarProducto.Image = (Image)resources.GetObject("pb_AgregarProducto.Image");
-            pb_AgregarProducto.Location = new Point(654, 156);
+            pb_AgregarProducto.Location = new Point(679, 162);
             pb_AgregarProducto.Name = "pb_AgregarProducto";
             pb_AgregarProducto.Size = new Size(63, 50);
             pb_AgregarProducto.SizeMode = PictureBoxSizeMode.Zoom;
@@ -192,7 +247,7 @@
             pb_EliminarProveedor.BackgroundImage = (Image)resources.GetObject("pb_EliminarProveedor.BackgroundImage");
             pb_EliminarProveedor.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EliminarProveedor.Cursor = Cursors.Hand;
-            pb_EliminarProveedor.Location = new Point(213, 154);
+            pb_EliminarProveedor.Location = new Point(296, 164);
             pb_EliminarProveedor.Name = "pb_EliminarProveedor";
             pb_EliminarProveedor.Size = new Size(49, 52);
             pb_EliminarProveedor.TabIndex = 24;
@@ -205,7 +260,7 @@
             pb_EditarProveedor.BackgroundImage = (Image)resources.GetObject("pb_EditarProveedor.BackgroundImage");
             pb_EditarProveedor.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EditarProveedor.Cursor = Cursors.Hand;
-            pb_EditarProveedor.Location = new Point(134, 152);
+            pb_EditarProveedor.Location = new Point(217, 162);
             pb_EditarProveedor.Name = "pb_EditarProveedor";
             pb_EditarProveedor.Size = new Size(60, 53);
             pb_EditarProveedor.TabIndex = 23;
@@ -219,7 +274,7 @@
             pb_AgregarProveedor.BackgroundImageLayout = ImageLayout.Zoom;
             pb_AgregarProveedor.Cursor = Cursors.Hand;
             pb_AgregarProveedor.Image = (Image)resources.GetObject("pb_AgregarProveedor.Image");
-            pb_AgregarProveedor.Location = new Point(64, 153);
+            pb_AgregarProveedor.Location = new Point(147, 163);
             pb_AgregarProveedor.Name = "pb_AgregarProveedor";
             pb_AgregarProveedor.Size = new Size(49, 52);
             pb_AgregarProveedor.TabIndex = 22;
@@ -228,47 +283,53 @@
             // 
             // dgv_Productos
             // 
+            dgv_Productos.BackgroundColor = SystemColors.Info;
             dgv_Productos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Productos.Location = new Point(534, 285);
+            dgv_Productos.Location = new Point(544, 273);
             dgv_Productos.Name = "dgv_Productos";
-            dgv_Productos.Size = new Size(422, 220);
+            dgv_Productos.Size = new Size(435, 220);
             dgv_Productos.TabIndex = 17;
-            dgv_Productos.CellClick += dgv_Productos_CellClick;
             // 
             // lbl_Categorias
             // 
             lbl_Categorias.AutoSize = true;
-            lbl_Categorias.Location = new Point(800, 28);
+            lbl_Categorias.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_Categorias.Location = new Point(816, 39);
             lbl_Categorias.Name = "lbl_Categorias";
-            lbl_Categorias.Size = new Size(63, 15);
+            lbl_Categorias.Size = new Size(81, 19);
             lbl_Categorias.TabIndex = 16;
             lbl_Categorias.Text = "Categorias";
             // 
             // lbl_Productos
             // 
             lbl_Productos.AutoSize = true;
-            lbl_Productos.Location = new Point(464, 28);
+            lbl_Productos.Font = new Font("Microsoft YaHei", 9.75F, FontStyle.Bold);
+            lbl_Productos.Location = new Point(485, 37);
             lbl_Productos.Name = "lbl_Productos";
-            lbl_Productos.Size = new Size(61, 15);
+            lbl_Productos.Size = new Size(77, 19);
             lbl_Productos.TabIndex = 15;
             lbl_Productos.Text = "Productos";
             // 
             // cb_Categorias
             // 
+            cb_Categorias.BackColor = SystemColors.InactiveCaption;
+            cb_Categorias.ForeColor = SystemColors.Menu;
             cb_Categorias.FormattingEnabled = true;
             cb_Categorias.Items.AddRange(new object[] { "Todas" });
-            cb_Categorias.Location = new Point(800, 41);
+            cb_Categorias.Location = new Point(816, 59);
             cb_Categorias.Name = "cb_Categorias";
-            cb_Categorias.Size = new Size(121, 23);
+            cb_Categorias.Size = new Size(121, 27);
             cb_Categorias.TabIndex = 14;
             cb_Categorias.SelectedIndexChanged += cb_Categorias_SelectedIndexChanged;
             // 
             // clb_Productos
             // 
+            clb_Productos.BackColor = SystemColors.InactiveCaption;
+            clb_Productos.ForeColor = SystemColors.Menu;
             clb_Productos.FormattingEnabled = true;
-            clb_Productos.Location = new Point(464, 41);
+            clb_Productos.Location = new Point(485, 57);
             clb_Productos.Name = "clb_Productos";
-            clb_Productos.Size = new Size(304, 58);
+            clb_Productos.Size = new Size(304, 48);
             clb_Productos.TabIndex = 13;
             // 
             // notificacion_Catalogo
@@ -281,14 +342,18 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LawnGreen;
             ClientSize = new Size(1004, 577);
             Controls.Add(gb_Proovedores);
+            ForeColor = SystemColors.ControlText;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Proveedores";
             Text = "Proveedores";
             Load += Proveedores_Load;
             ((System.ComponentModel.ISupportInitialize)dgv_Proveedores).EndInit();
             gb_Proovedores.ResumeLayout(false);
             gb_Proovedores.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_LogoEmpresa).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProducto).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarProducto).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarProveedor).EndInit();
@@ -321,5 +386,8 @@
         private NotifyIcon notificacion_Catalogo;
         private PictureBox pb_AgregarProducto;
         private PictureBox pb_EliminarProducto;
+        private Label lbl_Proveedores;
+        private Label lbl_CatalogoProductos;
+        private PictureBox pb_LogoEmpresa;
     }
 }
