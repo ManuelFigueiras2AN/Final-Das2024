@@ -136,15 +136,13 @@ namespace Vista
                 if (Seleccion != null)
                 {
                     txt_CodigoProveedor.Enabled = false;
-                    var proveedor = Seleccion.DataBoundItem as Proveedor;
+                    var proveedor = controladoraProveedores.ConsultarProveedores().FirstOrDefault(x => x.Codigo == dgv_Proveedores.Rows[e.RowIndex].Cells[0].Value.ToString());
 
                     txt_CodigoProveedor.Text = proveedor.Codigo.ToString();
                     txt_NombreProveedor.Text = proveedor.Nombre.ToString();
                     rtxt_Descripcion.Text = proveedor.Descripcion.ToString();
                     txt_ContactoProveedor.Text = proveedor.Contacto.ToString();
-                    proveedor.CatalogoProductos = controladoraProveedores.RecuperarProductosProveedor(proveedor);
-
-
+                    
                     foreach (Producto prod in proveedor.CatalogoProductos)
                     {
                         for (int i = 0; i < clb_Productos.Items.Count; i++)
@@ -246,7 +244,7 @@ namespace Vista
         private void RefrescarVistaCatalogo(Proveedor proveedor)
         {
             dgv_Productos.AutoGenerateColumns = false;
-            dgv_Productos.DataSource = controladoraProveedores.RecuperarProductosProveedor(proveedor);
+            dgv_Productos.DataSource = proveedor.CatalogoProductos;
             dgv_Productos.Columns.Clear();
 
             dgv_Productos.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Codigo", DataPropertyName = "CodigoProducto" });
@@ -288,27 +286,35 @@ namespace Vista
            
 
             Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
-            Producto? productoSeleccionado = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
+            //Producto? productoSeleccionado = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
 
             if (clb_Productos.CheckedItems.Count > 0)
             {
                 foreach (var productos in clb_Productos.CheckedItems)
                 {
                     Producto producto = productos as Producto;
-                    if (proveedor.AsociarProducto(productoSeleccionado))
+                    
+                    if (proveedor != null && producto != null)
+                    {
+                        if (!proveedor.CatalogoProductos.Contains(producto))
+                        {
+                            // Agrega el producto si no está en el catálogo
+                            if (proveedor.AsociarProducto(producto))
+                            {
+                                controladoraProveedores.ModificarProveedor(proveedor);
+                                MostrarNotificacion("Se agregó " + producto.Nombre + " al catálogo.", "Noticias Catálogo");
+                            }
 
-                    {
-                        MostrarNotificacion("Se agrego " + productoSeleccionado.Nombre + " al catalogo.", "Noticias Catalogo");
-                    }
-                    else
-                    {
-                        MostrarNotificacion(productoSeleccionado.Nombre + " ya existe en el  catalogo.", "Noticias Catalogo");
+                        }
+                        else
+                        {
+                            MostrarNotificacion("No hay productos para agregar al catalogo ", "Noticias Catálogo");
+                        }
+                        RefrescarVistaCatalogo(proveedor);
                     }
                 }
             }
-
-
-            RefrescarVistaCatalogo(proveedor);
+            
         }
 
         private void pb_EliminarProducto_Click(object sender, EventArgs e)
@@ -320,18 +326,23 @@ namespace Vista
 
             Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
             Producto? producto = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
-
-            if (proveedor.DesasociarProducto(producto)) 
+            
+            if (proveedor != null && producto != null)
             {
-              MostrarNotificacion("Se eliminó " + producto.Nombre + " del catalogo.", "Noticias Catalogo");
+                if (proveedor.DesasociarProducto(producto))
+                {
+                    controladoraProveedores.ModificarProveedor(proveedor);
+                    MostrarNotificacion("Se eliminó " + producto.Nombre + " del catalogo.", "Noticias Catalogo");
+                }
+                else
+                {
+                    MostrarNotificacion(producto.Nombre + " no existe en el  catalogo.", "Noticias Catalogo");
+                }
+                RefrescarVistaCatalogo(proveedor);
             }
-            else 
-            {
-                MostrarNotificacion(producto.Nombre + " no existe en el  catalogo.", "Noticias Catalogo");
-            }
-
+            
                 
-            //RefrescarVistaCatalogo(proveedor);
+           
         }
     }
 }

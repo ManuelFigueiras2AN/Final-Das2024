@@ -1,4 +1,5 @@
-﻿using Modelo;
+﻿using Microsoft.EntityFrameworkCore;
+using Modelo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,14 +18,11 @@ namespace Controladora
             _context = new Context();
         }
 
-        public ReadOnlyCollection<Proveedor> ConsultarProveedores()
+        public List<Proveedor> ConsultarProveedores()
         {
-            return _context.Proveedores.ToList().AsReadOnly();
+            return _context.Proveedores.Include(p=>p.CatalogoProductos).ToList();
         }
-        public ReadOnlyCollection<Producto> ConsultarProductos()
-        {
-            return _context.Productos.ToList().AsReadOnly();
-        }
+       
         public ReadOnlyCollection<Categoria> CargarCategorias()
         {
             return _context.Categorias.ToList().AsReadOnly();
@@ -33,16 +31,9 @@ namespace Controladora
         {
             return _context.Productos.Where(p =>( p.CategoriaAsociada.Nombre == Categoria.Nombre)).ToList().AsReadOnly();
         }
-        public List<Producto>RecuperarProductosProveedor(Proveedor proveedor) 
-        {
-            return _context.Proveedores.Where(p => p.Codigo == proveedor.Codigo).SelectMany(p => p.CatalogoProductos).ToList();
-        }
+        
        
 
-        public ReadOnlyCollection<Producto> ConsultaPorProveedor(Proveedor proveedor)
-        {
-            return proveedor.CatalogoProductos.ToList().AsReadOnly();
-        }
 
        
 

@@ -438,6 +438,7 @@
             Name = "Productos";
             Text = "Productos";
             Load += Productos_Load;
+            MouseDown += Productos_MouseDown;
             gb_Productos.ResumeLayout(false);
             gb_Productos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pb_CargarImagen).EndInit();

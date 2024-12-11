@@ -26,10 +26,11 @@ namespace Vista
             pb_CargarImagen.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        
+
         private void Productos_Load(object sender, EventArgs e)
         {
             ActualizarVista();
+            this.MouseDown += Productos_MouseDown;
         }
 
         private void pb_AgregarProducto_Click(object sender, EventArgs e)
@@ -250,17 +251,7 @@ namespace Vista
             cb_Categorias.DataSource = controladoraProductos.ConsultarCategorias();
             cb_Categorias.DisplayMember = "Nombre";
 
-            txt_Codigo.Enabled = true;
-            txt_Codigo.Text = string.Empty;
-            txt_Nombre.Text = string.Empty;
-            txt_Precio.Text = string.Empty;
-            txt_Stock.Text = string.Empty;
-            txt_StockMinimo.Text = string.Empty;
-            rtxt_Descripcion.Text = string.Empty; ;
-            txt_RutaImagen.Text = string.Empty;
-            chk_Importado.Enabled = true;
-            chk_Importado.Checked = false;
-            cb_Nacionalidad.Enabled = false;
+            LimpiarCampos();
 
         }
 
@@ -292,7 +283,7 @@ namespace Vista
                 MessageBox.Show("El campo Stock no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if(Convert.ToInt32(txt_Stock.Text)< Convert.ToInt32(txt_StockMinimo.Text))
+            if (Convert.ToInt32(txt_Stock.Text) < Convert.ToInt32(txt_StockMinimo.Text))
             {
                 MessageBox.Show("El Stock no puede ser menor que el minimo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -313,6 +304,12 @@ namespace Vista
                 MessageBox.Show("El Stock Minimo no puede ser negativo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            if (Stock < StockMin)
+            {
+                MessageBox.Show("El stock no puede ser menor al minimo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             return true;
         }
 
@@ -356,7 +353,6 @@ namespace Vista
                     chk_Importado.Enabled = false;
                 }
             }
-            chk_Importado.Enabled = true;
         }
 
         private void dgv_ProductosImportados_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -385,7 +381,6 @@ namespace Vista
                     cb_Nacionalidad.Enabled = true;
                 }
             }
-
         }
 
         private void ControlarEstadoCbNacionalidad(object sender, EventArgs e)
@@ -411,6 +406,46 @@ namespace Vista
                 // Mostrar la ruta en un TextBox
                 txt_RutaImagen.Text = rutaArchivo;
             }
+        }
+
+        private void SubscribeMouseDown(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                control.MouseDown += Productos_MouseDown;
+                if (control.HasChildren)
+                {
+                    SubscribeMouseDown(control);
+                }
+            }
+        }
+
+        private void Productos_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point clickLocation = this.PointToClient(Cursor.Position);
+
+            // Verifica si el clic está fuera de los límites del DataGridView
+            if (!dgv_ProductosNacionales.Bounds.Contains(clickLocation) || !dgv_ProductosImportados.Bounds.Contains(clickLocation))
+            {
+                dgv_ProductosNacionales.ClearSelection();
+                dgv_ProductosImportados.ClearSelection();
+                LimpiarCampos();
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            txt_Codigo.Text = string.Empty;
+            txt_Nombre.Text = string.Empty;
+            txt_Precio.Text = string.Empty;
+            txt_Stock.Text = string.Empty;
+            txt_StockMinimo.Text = string.Empty;
+            rtxt_Descripcion.Text = string.Empty; 
+            txt_RutaImagen.Text = string.Empty;
+            chk_Importado.Enabled = true;
+            chk_Importado.Checked = false;
+            cb_Nacionalidad.Enabled = false;
+            txt_Codigo.Enabled = true;
         }
     }
 }
