@@ -10,7 +10,7 @@ namespace Modelo
     {
         public int IdDetalle { get; set; }
         public int Cantidad { get; set; }
-        public decimal PrecioUnitario {  get; set; }
+        public decimal PrecioUnitario { get; set; } 
         public decimal Subtotal { get; set; }
         public Producto Producto { get; set; }
         public Factura FacturaAsociada { get; set; }
@@ -20,5 +20,7 @@ namespace Modelo
         {
             Subtotal = Cantidad * PrecioUnitario;
         }
+        public string NombreProducto { get { return Producto.Nombre; } }
+        public string PrecioProducto { get { return Producto.Precio.ToString(); } }
     }
 }   

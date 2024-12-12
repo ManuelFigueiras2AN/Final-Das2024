@@ -11,13 +11,13 @@ namespace Modelo
         public int IdFactura { get; set; }
         public int NumeroFactura { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal Total {  get; set; }
-        public Cliente Cliente {  get; set; }
+        public decimal Total { get; set; }
+        public Cliente Cliente { get; set; }
         public List<DetalleFactura> Detalle { get; set; }
 
         public void AgregarDetalleDeFactura(DetalleFactura detalle)
         {
-            var buscarDetalle = Detalle.FirstOrDefault(d=>d.Producto.CodigoProducto == detalle.Producto.CodigoProducto);
+            var buscarDetalle = Detalle.FirstOrDefault(d => d.Producto.CodigoProducto == detalle.Producto.CodigoProducto);
 
             if (buscarDetalle == null)
             {
@@ -38,7 +38,7 @@ namespace Modelo
 
             if (buscarDetalle != null)
             {
-                buscarDetalle.Cantidad-=detalle.Cantidad;
+                buscarDetalle.Cantidad -= detalle.Cantidad;
                 buscarDetalle.CalcularSubtotal();
                 Detalle.Remove(detalle);
             }
@@ -68,6 +68,10 @@ namespace Modelo
                 return 0;
             }
         }
+
+        public string NombreCliente {get { return Cliente.Nombre.ToString();}}
+        public string DniCliente { get { return Cliente.Dni.ToString();}}
+        public string ContactoCliente { get{ return Cliente.Contacto.ToString(); } }
 
 
     }

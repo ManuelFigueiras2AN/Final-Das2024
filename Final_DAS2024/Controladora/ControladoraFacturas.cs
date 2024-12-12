@@ -23,6 +23,10 @@ namespace Controladora
         {
             return _context.Facturas.Include(d=>d.Detalle).ToList().AsReadOnly();
         }
+        public ReadOnlyCollection<DetalleFactura> ConsultarDetalles()
+        {
+            return _context.DetallesFacturas.ToList().AsReadOnly();
+        }
         public ReadOnlyCollection<Producto> ConsultarProductos()
         {
             return _context.Productos.ToList().AsReadOnly();
@@ -100,11 +104,11 @@ namespace Controladora
             }
         }
 
-        public void RegistrarDetalle(Factura factura, DetalleFactura detalle)
+        public bool RegistrarDetalle(Factura factura, DetalleFactura detalle)
         {
             factura.AgregarDetalleDeFactura(detalle);
             _context.Facturas.Update(factura);
-            _context.SaveChanges();
+            return _context.SaveChanges()>0;
         }
 
         public void ElimarDetalle(Factura factura, DetalleFactura detalle)
