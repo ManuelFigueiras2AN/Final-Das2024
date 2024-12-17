@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Facturas));
             gb_Facturacion = new GroupBox();
+            pb_ProductoSeleccionado = new PictureBox();
             pb_EliminarDetalle = new PictureBox();
             pb_ActualizarDetalle = new PictureBox();
             pb_AgregarDetalle = new PictureBox();
@@ -50,8 +51,8 @@
             cb_Productos = new ComboBox();
             cb_ClienteMayorista = new ComboBox();
             cb_ClienteMinorista = new ComboBox();
-            pb_ProductoSeleccionado = new PictureBox();
             gb_Facturacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarDetalle).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_ActualizarDetalle).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarDetalle).BeginInit();
@@ -60,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)pb_AgregarFactura).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_DetalleFactura).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Facturas).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).BeginInit();
             SuspendLayout();
             // 
             // gb_Facturacion
@@ -92,6 +92,14 @@
             gb_Facturacion.TabIndex = 0;
             gb_Facturacion.TabStop = false;
             gb_Facturacion.Text = "Generador de Facturas";
+            // 
+            // pb_ProductoSeleccionado
+            // 
+            pb_ProductoSeleccionado.Location = new Point(14, 288);
+            pb_ProductoSeleccionado.Name = "pb_ProductoSeleccionado";
+            pb_ProductoSeleccionado.Size = new Size(232, 172);
+            pb_ProductoSeleccionado.TabIndex = 33;
+            pb_ProductoSeleccionado.TabStop = false;
             // 
             // pb_EliminarDetalle
             // 
@@ -249,14 +257,16 @@
             // 
             // dgv_DetalleFactura
             // 
+            dgv_DetalleFactura.BackgroundColor = SystemColors.Info;
             dgv_DetalleFactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_DetalleFactura.Location = new Point(276, 214);
             dgv_DetalleFactura.Name = "dgv_DetalleFactura";
-            dgv_DetalleFactura.Size = new Size(407, 150);
+            dgv_DetalleFactura.Size = new Size(407, 164);
             dgv_DetalleFactura.TabIndex = 11;
             // 
             // dgv_Facturas
             // 
+            dgv_Facturas.BackgroundColor = SystemColors.Info;
             dgv_Facturas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_Facturas.Location = new Point(276, 22);
             dgv_Facturas.Name = "dgv_Facturas";
@@ -288,25 +298,20 @@
             cb_ClienteMinorista.Size = new Size(165, 23);
             cb_ClienteMinorista.TabIndex = 7;
             // 
-            // pb_ProductoSeleccionado
-            // 
-            pb_ProductoSeleccionado.Location = new Point(14, 288);
-            pb_ProductoSeleccionado.Name = "pb_ProductoSeleccionado";
-            pb_ProductoSeleccionado.Size = new Size(232, 172);
-            pb_ProductoSeleccionado.TabIndex = 33;
-            pb_ProductoSeleccionado.TabStop = false;
-            // 
             // Facturas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.GreenYellow;
             ClientSize = new Size(800, 620);
             Controls.Add(gb_Facturacion);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Facturas";
             Text = "Facturas";
             Load += Facturas_Load;
             gb_Facturacion.ResumeLayout(false);
             gb_Facturacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarDetalle).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_ActualizarDetalle).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarDetalle).EndInit();
@@ -315,7 +320,6 @@
             ((System.ComponentModel.ISupportInitialize)pb_AgregarFactura).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_DetalleFactura).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Facturas).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).EndInit();
             ResumeLayout(false);
         }
 

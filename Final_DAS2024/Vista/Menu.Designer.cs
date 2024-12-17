@@ -36,10 +36,10 @@
             // mdp_Background
             // 
             mdp_Background.Enabled = true;
-            mdp_Background.Location = new Point(-7, -1);
+            mdp_Background.Location = new Point(-48, -55);
             mdp_Background.Name = "mdp_Background";
             mdp_Background.OcxState = (AxHost.State)resources.GetObject("mdp_Background.OcxState");
-            mdp_Background.Size = new Size(815, 450);
+            mdp_Background.Size = new Size(898, 532);
             mdp_Background.TabIndex = 0;
             // 
             // Menu

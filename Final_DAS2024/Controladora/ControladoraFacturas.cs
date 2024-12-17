@@ -117,5 +117,11 @@ namespace Controladora
             _context.Facturas.Update(factura);
             _context.SaveChanges();
         }
+
+        public bool ControlarTipoCliente(Factura factura)
+        {
+            var consultaCliente = factura.Cliente;
+            return (consultaCliente != null && !(consultaCliente is ClienteMayorista));
+        }
     }
 }

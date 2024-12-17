@@ -96,7 +96,35 @@ namespace Vista
 
         private void dgv_Facturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow Seleccion = dgv_Facturas.Rows[e.RowIndex];
+                if (Seleccion != null)
+                {
+                    txt_CodigoFactura.Enabled = false;
+                    
 
+                    var factura = controladoraFacturas.ConsultarFacturas().FirstOrDefault(x => x.NumeroFactura == Convert.ToInt32(dgv_Facturas.Rows[e.RowIndex].Cells[0].Value));
+                    
+                    txt_CodigoFactura.Text = factura.NumeroFactura.ToString();
+                    dtp_FechaFactura.Value = factura.Fecha;
+
+                    switch (controladoraFacturas.ControlarTipoCliente(factura))
+                    {
+                        case true:
+                            cb_ClienteMayorista.Enabled = false;
+                            cb_ClienteMinorista.SelectedItem=factura.Cliente;
+                            break;
+                       
+                        case false:
+                            cb_ClienteMinorista.Enabled = false;
+                            cb_ClienteMayorista.SelectedItem = factura.Cliente;
+                            break;
+                    }
+                    
+
+                }
+            }
         }
 
         private bool ValidarCamposFactura() 

@@ -24,7 +24,7 @@ namespace Vista
 
         private void ConfigurarVideo()
         {
-            string videoPath = "C:\\Users\\Ente\\source\\repos\\Final-Das2024\\Final_DAS2024\\Vista\\Properties\\Resources\\Videos\\fondo.mp4"; // Asegúrate de colocar la ruta correcta del video
+            string videoPath = "C:\\Users\\Ente\\source\\repos\\Final-Das2024\\Final_DAS2024\\Vista\\Properties\\Resources\\Videos\\presentacion.mp4"; // Asegúrate de colocar la ruta correcta del video
 
             // Reproduce el video en el fondo
             mdp_Background.URL = videoPath;
