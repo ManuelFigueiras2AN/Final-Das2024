@@ -23,9 +23,9 @@ namespace Controladora
         {
             return _context.Facturas.Include(d=>d.Detalle).ToList().AsReadOnly();
         }
-        public ReadOnlyCollection<DetalleFactura> ConsultarDetalles()
+        public ReadOnlyCollection<DetalleFactura> ConsultarDetalles(Factura factura)
         {
-            return _context.DetallesFacturas.ToList().AsReadOnly();
+            return factura.Detalle.ToList().AsReadOnly();
         }
         public ReadOnlyCollection<Producto> ConsultarProductos()
         {
@@ -111,11 +111,11 @@ namespace Controladora
             return _context.SaveChanges()>0;
         }
 
-        public void ElimarDetalle(Factura factura, DetalleFactura detalle)
+        public bool ElimarDetalle(Factura factura, DetalleFactura detalle)
         {
             factura.EliminarDetalleDeFactura(detalle);
             _context.Facturas.Update(factura);
-            _context.SaveChanges();
+            return _context.SaveChanges()>0;
         }
 
         public bool ControlarTipoCliente(Factura factura)

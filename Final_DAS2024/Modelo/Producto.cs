@@ -20,15 +20,19 @@ namespace Modelo
 
         public Categoria CategoriaAsociada {  get; set; }
 
-        public bool AjustarStock(int cantidad)
+        public void AjustarStock(int cantidad)
         {
             Stock -= cantidad;
 
-            if (Stock <= StockMinimo)
-            {
-                return false;
-            }
-            else return true;
+            //if (Stock <= StockMinimo)
+           // {
+            //    return false;
+           // }
+            //else return true;
+        }
+        public void RecuperarStock(int cantidad)
+        {
+            Stock += cantidad;
         }
         public string NombreCategoria
         {

@@ -59,5 +59,15 @@ namespace Vista.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_fig_kart_01__1_ {
+            get {
+                object obj = ResourceManager.GetObject("logo fig kart-01 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

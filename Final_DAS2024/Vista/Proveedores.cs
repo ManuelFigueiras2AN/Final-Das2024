@@ -283,8 +283,6 @@ namespace Vista
 
         private void pb_AgregarProducto_Click(object sender, EventArgs e)
         {
-           
-
             Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
             //Producto? productoSeleccionado = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
 
@@ -326,7 +324,7 @@ namespace Vista
 
             Proveedor? proveedor = dgv_Proveedores.SelectedRows[0].DataBoundItem as Proveedor;
             Producto? producto = dgv_Productos.SelectedRows[0].DataBoundItem as Producto;
-            
+
             if (proveedor != null && producto != null)
             {
                 if (proveedor.DesasociarProducto(producto))
@@ -339,10 +337,7 @@ namespace Vista
                     MostrarNotificacion(producto.Nombre + " no existe en el  catalogo.", "Noticias Catalogo");
                 }
                 RefrescarVistaCatalogo(proveedor);
-            }
-            
-                
-           
+            }  
         }
     }
 }

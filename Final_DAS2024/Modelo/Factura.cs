@@ -10,7 +10,7 @@ namespace Modelo
     {
         public int IdFactura { get; set; }
         public int NumeroFactura { get; set; }
-        public DateTime Fecha { get; set; }
+        public DateTime Fecha { get; set; }= DateTime.Now;
         public decimal Total { get; set; }
         public Cliente Cliente { get; set; }
         public List<DetalleFactura> Detalle { get; set; }
@@ -21,13 +21,15 @@ namespace Modelo
 
             if (buscarDetalle == null)
             {
+                detalle.Producto.AjustarStock(detalle.Cantidad);
                 detalle.CalcularSubtotal();
                 Detalle.Add(detalle);
             }
             else
             {
+                detalle.Producto.AjustarStock(detalle.Cantidad);
                 buscarDetalle.Cantidad += detalle.Cantidad;
-                buscarDetalle.CalcularSubtotal();
+                buscarDetalle.CalcularSubtotal();  
             }
             CalcularTotal();
         }
@@ -38,6 +40,7 @@ namespace Modelo
 
             if (buscarDetalle != null)
             {
+                detalle.Producto.RecuperarStock(detalle.Cantidad);
                 buscarDetalle.Cantidad -= detalle.Cantidad;
                 buscarDetalle.CalcularSubtotal();
                 Detalle.Remove(detalle);
