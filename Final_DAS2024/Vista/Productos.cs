@@ -426,9 +426,7 @@ namespace Vista
 
             // Verifica si el clic está fuera de los límites del DataGridView
             if (!dgv_ProductosNacionales.Bounds.Contains(clickLocation) || !dgv_ProductosImportados.Bounds.Contains(clickLocation))
-            {
-                dgv_ProductosNacionales.ClearSelection();
-                dgv_ProductosImportados.ClearSelection();
+            {   
                 LimpiarCampos();
             }
         }
@@ -446,6 +444,8 @@ namespace Vista
             chk_Importado.Checked = false;
             cb_Nacionalidad.Enabled = false;
             txt_Codigo.Enabled = true;
+            dgv_ProductosNacionales.ClearSelection();
+            dgv_ProductosImportados.ClearSelection();
         }
     }
 }

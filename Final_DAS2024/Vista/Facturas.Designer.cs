@@ -31,9 +31,13 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Facturas));
             gb_Facturacion = new GroupBox();
+            chk_ClienteMayorista = new CheckBox();
+            lbl_DetalleFactura = new Label();
+            lbl_TituloFacturas = new Label();
+            lbl_TotalFactura = new Label();
             pb_ProductoSeleccionado = new PictureBox();
             pb_EliminarDetalle = new PictureBox();
-            pb_ActualizarDetalle = new PictureBox();
+            pb_ImprimirFactura = new PictureBox();
             pb_AgregarDetalle = new PictureBox();
             pb_EliminarFactura = new PictureBox();
             pb_AgregarFactura = new PictureBox();
@@ -53,7 +57,7 @@
             gb_Facturacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarDetalle).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pb_ActualizarDetalle).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pb_ImprimirFactura).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarDetalle).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarFactura).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarFactura).BeginInit();
@@ -63,9 +67,13 @@
             // 
             // gb_Facturacion
             // 
+            gb_Facturacion.Controls.Add(chk_ClienteMayorista);
+            gb_Facturacion.Controls.Add(lbl_DetalleFactura);
+            gb_Facturacion.Controls.Add(lbl_TituloFacturas);
+            gb_Facturacion.Controls.Add(lbl_TotalFactura);
             gb_Facturacion.Controls.Add(pb_ProductoSeleccionado);
             gb_Facturacion.Controls.Add(pb_EliminarDetalle);
-            gb_Facturacion.Controls.Add(pb_ActualizarDetalle);
+            gb_Facturacion.Controls.Add(pb_ImprimirFactura);
             gb_Facturacion.Controls.Add(pb_AgregarDetalle);
             gb_Facturacion.Controls.Add(pb_EliminarFactura);
             gb_Facturacion.Controls.Add(pb_AgregarFactura);
@@ -88,6 +96,52 @@
             gb_Facturacion.TabStop = false;
             gb_Facturacion.Text = "Generador de Facturas";
             // 
+            // chk_ClienteMayorista
+            // 
+            chk_ClienteMayorista.AutoSize = true;
+            chk_ClienteMayorista.Location = new Point(220, 33);
+            chk_ClienteMayorista.Name = "chk_ClienteMayorista";
+            chk_ClienteMayorista.Size = new Size(110, 19);
+            chk_ClienteMayorista.TabIndex = 37;
+            chk_ClienteMayorista.Text = "Venta Mayorista";
+            chk_ClienteMayorista.UseVisualStyleBackColor = true;
+            chk_ClienteMayorista.CheckedChanged += chk_ClienteMayorista_CheckedChanged;
+            // 
+            // lbl_DetalleFactura
+            // 
+            lbl_DetalleFactura.AutoSize = true;
+            lbl_DetalleFactura.BackColor = Color.MediumBlue;
+            lbl_DetalleFactura.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_DetalleFactura.ForeColor = SystemColors.Control;
+            lbl_DetalleFactura.Location = new Point(528, 294);
+            lbl_DetalleFactura.Name = "lbl_DetalleFactura";
+            lbl_DetalleFactura.Size = new Size(143, 20);
+            lbl_DetalleFactura.TabIndex = 36;
+            lbl_DetalleFactura.Text = "DETALLE FACTURA";
+            // 
+            // lbl_TituloFacturas
+            // 
+            lbl_TituloFacturas.AutoSize = true;
+            lbl_TituloFacturas.BackColor = Color.MediumBlue;
+            lbl_TituloFacturas.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_TituloFacturas.ForeColor = SystemColors.Control;
+            lbl_TituloFacturas.Location = new Point(501, 37);
+            lbl_TituloFacturas.Name = "lbl_TituloFacturas";
+            lbl_TituloFacturas.Size = new Size(197, 20);
+            lbl_TituloFacturas.TabIndex = 35;
+            lbl_TituloFacturas.Text = "ENCABEZADOS FACTURAS";
+            // 
+            // lbl_TotalFactura
+            // 
+            lbl_TotalFactura.AutoSize = true;
+            lbl_TotalFactura.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbl_TotalFactura.ForeColor = Color.DarkBlue;
+            lbl_TotalFactura.Location = new Point(14, 191);
+            lbl_TotalFactura.Name = "lbl_TotalFactura";
+            lbl_TotalFactura.Size = new Size(125, 21);
+            lbl_TotalFactura.TabIndex = 34;
+            lbl_TotalFactura.Text = "Total Factura: $";
+            // 
             // pb_ProductoSeleccionado
             // 
             pb_ProductoSeleccionado.Image = Properties.Resources.logo_fig_kart_01__1_;
@@ -104,24 +158,25 @@
             pb_EliminarDetalle.BackgroundImage = (Image)resources.GetObject("pb_EliminarDetalle.BackgroundImage");
             pb_EliminarDetalle.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EliminarDetalle.Cursor = Cursors.Hand;
-            pb_EliminarDetalle.Location = new Point(841, 414);
+            pb_EliminarDetalle.Location = new Point(851, 387);
             pb_EliminarDetalle.Name = "pb_EliminarDetalle";
             pb_EliminarDetalle.Size = new Size(49, 36);
             pb_EliminarDetalle.TabIndex = 32;
             pb_EliminarDetalle.TabStop = false;
             pb_EliminarDetalle.Click += pb_EliminarDetalle_Click;
             // 
-            // pb_ActualizarDetalle
+            // pb_ImprimirFactura
             // 
-            pb_ActualizarDetalle.BackColor = Color.Transparent;
-            pb_ActualizarDetalle.BackgroundImage = (Image)resources.GetObject("pb_ActualizarDetalle.BackgroundImage");
-            pb_ActualizarDetalle.BackgroundImageLayout = ImageLayout.Zoom;
-            pb_ActualizarDetalle.Cursor = Cursors.Hand;
-            pb_ActualizarDetalle.Location = new Point(841, 363);
-            pb_ActualizarDetalle.Name = "pb_ActualizarDetalle";
-            pb_ActualizarDetalle.Size = new Size(49, 45);
-            pb_ActualizarDetalle.TabIndex = 31;
-            pb_ActualizarDetalle.TabStop = false;
+            pb_ImprimirFactura.BackColor = Color.Transparent;
+            pb_ImprimirFactura.BackgroundImage = (Image)resources.GetObject("pb_ImprimirFactura.BackgroundImage");
+            pb_ImprimirFactura.BackgroundImageLayout = ImageLayout.Zoom;
+            pb_ImprimirFactura.Cursor = Cursors.Hand;
+            pb_ImprimirFactura.Location = new Point(851, 232);
+            pb_ImprimirFactura.Name = "pb_ImprimirFactura";
+            pb_ImprimirFactura.Size = new Size(50, 45);
+            pb_ImprimirFactura.TabIndex = 31;
+            pb_ImprimirFactura.TabStop = false;
+            pb_ImprimirFactura.Click += pb_ImprimirFactura_Click;
             // 
             // pb_AgregarDetalle
             // 
@@ -130,7 +185,7 @@
             pb_AgregarDetalle.BackgroundImageLayout = ImageLayout.Zoom;
             pb_AgregarDetalle.Cursor = Cursors.Hand;
             pb_AgregarDetalle.Image = (Image)resources.GetObject("pb_AgregarDetalle.Image");
-            pb_AgregarDetalle.Location = new Point(841, 319);
+            pb_AgregarDetalle.Location = new Point(851, 345);
             pb_AgregarDetalle.Name = "pb_AgregarDetalle";
             pb_AgregarDetalle.Size = new Size(49, 36);
             pb_AgregarDetalle.TabIndex = 30;
@@ -143,7 +198,7 @@
             pb_EliminarFactura.BackgroundImage = (Image)resources.GetObject("pb_EliminarFactura.BackgroundImage");
             pb_EliminarFactura.BackgroundImageLayout = ImageLayout.Zoom;
             pb_EliminarFactura.Cursor = Cursors.Hand;
-            pb_EliminarFactura.Location = new Point(841, 98);
+            pb_EliminarFactura.Location = new Point(851, 134);
             pb_EliminarFactura.Name = "pb_EliminarFactura";
             pb_EliminarFactura.Size = new Size(49, 36);
             pb_EliminarFactura.TabIndex = 29;
@@ -157,7 +212,7 @@
             pb_AgregarFactura.BackgroundImageLayout = ImageLayout.Zoom;
             pb_AgregarFactura.Cursor = Cursors.Hand;
             pb_AgregarFactura.Image = (Image)resources.GetObject("pb_AgregarFactura.Image");
-            pb_AgregarFactura.Location = new Point(841, 56);
+            pb_AgregarFactura.Location = new Point(851, 92);
             pb_AgregarFactura.Name = "pb_AgregarFactura";
             pb_AgregarFactura.Size = new Size(49, 36);
             pb_AgregarFactura.TabIndex = 27;
@@ -227,7 +282,7 @@
             // 
             dgv_DetalleFactura.BackgroundColor = SystemColors.Info;
             dgv_DetalleFactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_DetalleFactura.Location = new Point(346, 276);
+            dgv_DetalleFactura.Location = new Point(356, 312);
             dgv_DetalleFactura.Name = "dgv_DetalleFactura";
             dgv_DetalleFactura.Size = new Size(470, 234);
             dgv_DetalleFactura.TabIndex = 11;
@@ -237,7 +292,7 @@
             // 
             dgv_Facturas.BackgroundColor = SystemColors.Info;
             dgv_Facturas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv_Facturas.Location = new Point(346, 20);
+            dgv_Facturas.Location = new Point(356, 56);
             dgv_Facturas.Name = "dgv_Facturas";
             dgv_Facturas.Size = new Size(470, 221);
             dgv_Facturas.TabIndex = 10;
@@ -284,11 +339,12 @@
             Name = "Facturas";
             Text = "Facturas";
             Load += Facturas_Load;
+            MouseDown += Facturas_MouseDown;
             gb_Facturacion.ResumeLayout(false);
             gb_Facturacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pb_ProductoSeleccionado).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarDetalle).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pb_ActualizarDetalle).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pb_ImprimirFactura).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarDetalle).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_EliminarFactura).EndInit();
             ((System.ComponentModel.ISupportInitialize)pb_AgregarFactura).EndInit();
@@ -313,11 +369,15 @@
         private Label lbl_CodigoFactura;
         private Label lbl_Cantidad;
         private PictureBox pb_EliminarDetalle;
-        private PictureBox pb_ActualizarDetalle;
+        private PictureBox pb_ImprimirFactura;
         private PictureBox pb_AgregarDetalle;
         private PictureBox pb_EliminarFactura;
         private PictureBox pb_AgregarFactura;
         private PictureBox pb_ProductoSeleccionado;
         private NotifyIcon notificacionesFacturas;
+        private Label lbl_TotalFactura;
+        private Label lbl_DetalleFactura;
+        private Label lbl_TituloFacturas;
+        private CheckBox chk_ClienteMayorista;
     }
 }
